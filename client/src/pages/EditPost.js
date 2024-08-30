@@ -43,15 +43,18 @@ export default function EditPost() {
   }
 
   return (
-    <form onSubmit={updatePost}>
-      <input type="title"
-             placeholder={'Title'}
-             value={title}
-             onChange={ev => setTitle(ev.target.value)} />
-      <input type="file"
-             onChange={ev => setFiles(ev.target.files)} />
-      <Editor onChange={setContent} value={content} />
-      <button style={{marginTop:'5px'}}>Update post</button>
-    </form>
+    <div className="create-page">
+      <h4 className="page-title"> Edit </h4>
+      <form onSubmit={updatePost}>
+        <input type="title"
+              placeholder={'Title'}
+              value={title}
+              onChange={ev => setTitle(ev.target.value)} />
+        <input type="file"
+              onChange={ev => setFiles(ev.target.files)} />
+        <Editor onChange={setContent} value={content} />
+        <button style={{marginTop:'5px'}}>Update post</button>
+      </form>
+    </div>
   );
 }

@@ -215,6 +215,11 @@ a svg {
   height: 20px;
 }
 
+div.create-page {
+  width: 90%;
+  margin-inline: auto;
+}
+
 /**************************************** FOOTER SECTION ****************************************/
 footer {
   background-color: #0b3a6c;
@@ -293,4 +298,15 @@ footer h4 {
 
 .page-item:not(.active) .page-link:hover {
   background-color: rgb(190, 188, 188);
+}
+
+/**************************************** ABOUT SECTION ****************************************/
+div.about-page {
+  width: 80%;
+  margin-inline: auto;
+}
+
+.page-title {
+  font-family: "Libre Baskerville", serif;
+  font-size: 2rem;
 }

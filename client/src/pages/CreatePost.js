@@ -29,15 +29,18 @@ export default function CreatePost() {
     return <Navigate to={'/'} />
   }
   return (
-    <form onSubmit={createNewPost}>
-      <input type="title"
-             placeholder={'Title'}
-             value={title}
-             onChange={ev => setTitle(ev.target.value)} />
-      <input type="file"
-             onChange={ev => setFiles(ev.target.files)} />
-      <Editor value={content} onChange={setContent} />
-      <button style={{marginTop:'5px'}}>Create post</button>
-    </form>
+    <div className="create-page">
+      <h4 className="page-title"> Create </h4>
+      <form onSubmit={createNewPost}>
+        <input type="title"
+              placeholder={'Title'}
+              value={title}
+              onChange={ev => setTitle(ev.target.value)} />
+        <input type="file"
+              onChange={ev => setFiles(ev.target.files)} />
+        <Editor value={content} onChange={setContent} />
+        <button style={{marginTop:'5px'}}>Create post</button>
+      </form>
+    </div>
   );
 }

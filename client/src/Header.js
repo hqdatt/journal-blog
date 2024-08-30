@@ -32,7 +32,7 @@ export default function Header() {
       </Link>
       <nav>
         <Link to="/">HOME</Link>
-        <Link to="/create">ABOUT</Link>
+        <Link to="/about">ABOUT</Link>
         {username && (
           <>
             <Link to="/create">CREATE</Link>
