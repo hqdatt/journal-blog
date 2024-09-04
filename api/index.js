@@ -10,6 +10,8 @@ const cookieParser = require("cookie-parser");
 const multer = require("multer");
 const uploadMiddleware = multer({ dest: "uploads/" });
 const fs = require("fs");
+const dotenv = require("dotenv")
+dotenv.config()
 
 const salt = bcrypt.genSaltSync(10);
 const secret = "asdfe45we45w345wegw345werjktjwertkj";
@@ -77,10 +79,9 @@ app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
   const { token } = req.cookies;
   jwt.verify(token, secret, {}, async (err, info) => {
     if (err) throw err;
-    const { title, summary, content } = req.body;
+    const { title, content } = req.body;
     const postDoc = await Post.create({
       title,
-      summary,
       content,
       cover: newPath,
       author: info.id,
@@ -102,7 +103,7 @@ app.put("/post", uploadMiddleware.single("file"), async (req, res) => {
   const { token } = req.cookies;
   jwt.verify(token, secret, {}, async (err, info) => {
     if (err) throw err;
-    const { id, title, summary, content } = req.body;
+    const { id, title, content } = req.body;
     const postDoc = await Post.findById(id);
     const isAuthor = JSON.stringify(postDoc.author) === JSON.stringify(info.id);
     if (!isAuthor) {
@@ -110,7 +111,6 @@ app.put("/post", uploadMiddleware.single("file"), async (req, res) => {
     }
     await postDoc.update({
       title,
-      summary,
       content,
       cover: newPath ? newPath : postDoc.cover,
     });
@@ -122,9 +122,8 @@ app.put("/post", uploadMiddleware.single("file"), async (req, res) => {
 app.get("/post", async (req, res) => {
   res.json(
     await Post.find()
-      .populate("author", ["username"])
       .sort({ createdAt: -1 })
-      .limit(20)
+      .limit(50)
   );
 });
 
@@ -134,5 +133,8 @@ app.get("/post/:id", async (req, res) => {
   res.json(postDoc);
 });
 
-app.listen(4000);
-//
+if (process.env.API_PORT) {
+  app.listen(process.env.API_PORT);
+}
+
+module.exports = app;
